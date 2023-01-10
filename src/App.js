@@ -7,27 +7,11 @@ import Todo from "./components/Todo/Todo";
 function App() {
 
   const [todos, setTodos] = useState([
-    {
-      id: 1, 
-      title: 'Programe a React app',
-      completed: false
-    },
-    {
-      id: 2, 
-      title: 'Record the next Video',
-      completed: false
-    },
-    {
-      id: 3, 
-      title: 'Read a Book',
-      completed: false
-    },
-    {
-      id: 4, 
-      title: 'Netflix',
-      completed: false
-    },
+   
   ])
+
+  const [activeFilter, setActiveFilter] =useState('all');
+  const[ilteredTodo, setFilteredTodo] = useState(todos);
 
   const addTodo = (title) => {
     const lastId = todos.length > 0 ? todos[todos.length - 1].id : 1;
@@ -52,6 +36,28 @@ function App() {
     setTodos(updateList);
   }
 
+  const handleDelete = (id) => {
+    const updateList = todos.filter(todo => todo.id != id);
+    setTodos(updateList);
+  }
+
+  const handleClearComplete = () => {
+    const updateList = todos.filter(todo => !todo.completed);
+    setActiveFilter(updateList);
+  }
+  
+  const showAllTodo = () =>{
+    setActiveFilter('all');
+
+  }
+  const showActiveTodos = () => {
+    setActiveFilter('active');
+  }
+
+  const showCompletedTodos = () => {
+    setActiveFilter('completed')
+  }
+
   return (
     <div className="bg-gray-900 min-h-screen h-full font-inter text-gray-100 flex items-center justify-center py-20 px-5">
       <div className="container flex-col max-w-xl">
@@ -60,6 +66,7 @@ function App() {
           <TodoList 
           todos={todos}
             handleSetCompleted={handleSetCompleted}
+            handleDelete={handleDelete}
           />
       </div>
       

@@ -1,5 +1,5 @@
 
-const Todo = ({todo, handleSetCompleted}) => {
+const Todo = ({todo, handleSetCompleted, handleDelete}) => {
 
     const {id, title, completed} = todo
 
@@ -20,7 +20,7 @@ const Todo = ({todo, handleSetCompleted}) => {
                 </p>
                
             </div>
-            <img className="h-5 w-5 cursor-pointer transition-all duration-300 ease-in" src="/close-icon.svg" alt="close icon"></img>
+            <img onClick={()=> handleDelete(id)} className="h-5 w-5 cursor-pointer transition-all duration-300 ease-in" src="/close-icon.svg" alt="close icon"></img>
         </div>
     )
 }
